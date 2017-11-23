@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Lib.AspNetCore.ClientHints is a library which provides support to ASP.NET Core for set of HTTP request header fields, colloquially known as Client Hints, which allow user agents to indicate device and agent specific preferences.</Description>
+    <Copyright>Copyright © 2017 Tomasz Pęczek</Copyright>
+    <VersionPrefix>0.5.0-latest</VersionPrefix>
+    <Authors>Tomasz Pęczek</Authors>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyTitle>Lib.AspNetCore.ClientHints</AssemblyTitle>
+    <AssemblyName>Lib.AspNetCore.ClientHints</AssemblyName>
+    <PackageId>Lib.AspNetCore.ClientHints</PackageId>
+    <PackageTags>aspnetcore;clienthints;performance</PackageTags>
+    <PackageProjectUrl>https://github.com/tpeczek/Lib.AspNetCore.ClientHints</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/tpeczek/Lib.AspNetCore.ClientHints/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/tpeczek/Lib.AspNetCore.ClientHints</RepositoryUrl>
+    <GenerateAssemblyTitleAttribute>true</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>true</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyProductAttribute>true</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>true</GenerateAssemblyCopyrightAttribute>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.0.0" />
+  </ItemGroup>
+</Project>
