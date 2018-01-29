@@ -8,6 +8,7 @@ namespace Lib.AspNetCore.ClientHints.Http.Headers
     public class AcceptClientHintsHeaderValue
     {
         #region Fields
+        private bool _acceptDeviceMemory = false;
         private bool _acceptDevicePixelRatio = false;
         private bool _acceptWidth = false;
         private bool _acceptViewportWidth = false;
@@ -17,6 +18,20 @@ namespace Lib.AspNetCore.ClientHints.Http.Headers
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets or sets the value indicating if Device Memory hint is supported.
+        /// </summary>
+        public bool AcceptDeviceMemory
+        {
+            get { return _acceptDeviceMemory; }
+
+            set
+            {
+                _headerValue = null;
+                _acceptDeviceMemory = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets the value indicating if Device Pixel Ratio hint is supported.
         /// </summary>
@@ -84,6 +99,11 @@ namespace Lib.AspNetCore.ClientHints.Http.Headers
             if (_headerValue == null)
             {
                 StringBuilder headerValueBuilder = new StringBuilder();
+
+                if (_acceptDeviceMemory)
+                {
+                    headerValueBuilder.Append(HeaderNames.DeviceMemory).Append(", ");
+                }
 
                 if (_acceptDevicePixelRatio)
                 {

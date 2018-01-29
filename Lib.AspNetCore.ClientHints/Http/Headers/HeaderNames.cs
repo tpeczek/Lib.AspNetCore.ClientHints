@@ -16,6 +16,11 @@
         public const string AcceptClientHintsLifetime = "Accept-CH-Lifetime";
 
         /// <summary>
+        /// The Device-Memory header.
+        /// </summary>
+        public const string DeviceMemory = "Device-Memory";
+
+        /// <summary>
         /// The DPR header.
         /// </summary>
         public const string DevicePixelRatio = "DPR";

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
@@ -17,7 +16,7 @@ namespace Lib.AspNetCore.ClientHints.Http.Extensions
         #region Fields
         private const string SAVE_DATA_HEADER_VALUE_KEY = "Lib.AspNetCore.ClientHints.Http.Headers.SaveDataHeaderValue";
 
-        private readonly static NumberFormatInfo _devicePixelRatioNumberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+        private readonly static NumberFormatInfo _clientHintNumberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
         #endregion
 
         #region Methods
@@ -28,19 +27,7 @@ namespace Lib.AspNetCore.ClientHints.Http.Extensions
         /// <returns>The Width header value.</returns>
         public static int? GetWidth(this HttpRequest request)
         {
-            int? width = null;
-
-            StringValues headerValue = request.Headers[ClientHintsHeaderNames.Width];
-            if (!StringValues.IsNullOrEmpty(headerValue))
-            {
-                int parsedHeaderValue;
-                if (HeaderUtilities.TryParseNonNegativeInt32(headerValue[headerValue.Count -1], out parsedHeaderValue))
-                {
-                    width = parsedHeaderValue;
-                }
-            }
-
-            return width;
+            return request.GetNullableNonNegativeInt32HeaderValue(ClientHintsHeaderNames.Width);
         }
 
         /// <summary>
@@ -50,19 +37,17 @@ namespace Lib.AspNetCore.ClientHints.Http.Extensions
         /// <returns>The Viewport-Width header value.</returns>
         public static int? GetViewportWidth(this HttpRequest request)
         {
-            int? viewportWidth = null;
+            return request.GetNullableNonNegativeInt32HeaderValue(ClientHintsHeaderNames.ViewportWidth);
+        }
 
-            StringValues headerValue = request.Headers[ClientHintsHeaderNames.ViewportWidth];
-            if (!StringValues.IsNullOrEmpty(headerValue))
-            {
-                int parsedHeaderValue;
-                if (HeaderUtilities.TryParseNonNegativeInt32(headerValue[headerValue.Count - 1], out parsedHeaderValue))
-                {
-                    viewportWidth = parsedHeaderValue;
-                }
-            }
-
-            return viewportWidth;
+        /// <summary>
+        /// Gets the Device-Memory header value.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns>The Device-Memory header value.</returns>
+        public static decimal? GetDeviceMemory(this HttpRequest request)
+        {
+            return request.GetNullableDecimalHeaderValue(ClientHintsHeaderNames.DeviceMemory);
         }
 
         /// <summary>
@@ -72,19 +57,7 @@ namespace Lib.AspNetCore.ClientHints.Http.Extensions
         /// <returns>The DPR header value.</returns>
         public static decimal? GetDevicePixelRatio(this HttpRequest request)
         {
-            decimal? devicePixelRatio = null;
-
-            StringValues headerValue = request.Headers[ClientHintsHeaderNames.DevicePixelRatio];
-            if (!StringValues.IsNullOrEmpty(headerValue))
-            {
-                decimal parsedHeaderValue;
-                if (Decimal.TryParse(headerValue[headerValue.Count - 1], NumberStyles.AllowDecimalPoint, _devicePixelRatioNumberFormatInfo, out parsedHeaderValue))
-                {
-                    devicePixelRatio = parsedHeaderValue;
-                }
-            }
-
-            return devicePixelRatio;
+            return request.GetNullableDecimalHeaderValue(ClientHintsHeaderNames.DevicePixelRatio);
         }
 
         /// <summary>
@@ -110,6 +83,40 @@ namespace Lib.AspNetCore.ClientHints.Http.Extensions
             }
 
             return request.HttpContext.Items[SAVE_DATA_HEADER_VALUE_KEY] as SaveDataHeaderValue;
+        }
+
+        private static int? GetNullableNonNegativeInt32HeaderValue(this HttpRequest request, string headerName)
+        {
+            int? headerValue = null;
+
+            StringValues rawHeaderValues = request.Headers[headerName];
+            if (!StringValues.IsNullOrEmpty(rawHeaderValues))
+            {
+                int parsedHeaderValue;
+                if (HeaderUtilities.TryParseNonNegativeInt32(rawHeaderValues[rawHeaderValues.Count - 1], out parsedHeaderValue))
+                {
+                    headerValue = parsedHeaderValue;
+                }
+            }
+
+            return headerValue;
+        }
+
+        private static decimal? GetNullableDecimalHeaderValue(this HttpRequest request, string headerName)
+        {
+            decimal? headerValue = null;
+
+            StringValues rawHeaderValues = request.Headers[headerName];
+            if (!StringValues.IsNullOrEmpty(rawHeaderValues))
+            {
+                decimal parsedHeaderValue;
+                if (Decimal.TryParse(rawHeaderValues[rawHeaderValues.Count - 1], NumberStyles.AllowDecimalPoint, _clientHintNumberFormatInfo, out parsedHeaderValue))
+                {
+                    headerValue = parsedHeaderValue;
+                }
+            }
+
+            return headerValue;
         }
         #endregion
     }
