@@ -1,6 +1,19 @@
 # Lib.AspNetCore.ClientHints
+[![NuGet version](https://badge.fury.io/nu/Lib.AspNetCore.ClientHints.svg)](http://badge.fury.io/nu/Lib.AspNetCore.ClientHints) [![NuGet version](https://badge.fury.io/nu/Lib.AspNetCore.Mvc.ClientHints.svg)](http://badge.fury.io/nu/Lib.AspNetCore.Mvc.ClientHints)
 
 Lib.AspNetCore.ClientHints is a library which provides support for set of HTTP request header fields, colloquially known as Client Hints, to address a need to deliver optimized content for each device to ASP.NET Core.
+
+## Getting Started
+
+You can get [Lib.AspNetCore.ClientHints](https://www.nuget.org/packages/Lib.AspNetCore.ClientHints) and [Lib.AspNetCore.Mvc.ClientHints](https://www.nuget.org/packages/Lib.AspNetCore.Mvc.ClientHints) from NuGet.
+
+```
+PM>  Install-Package Lib.AspNetCore.ClientHints
+```
+
+```
+PM>  Install-Package Lib.AspNetCore.Mvc.ClientHints
+```
 
 ## Documentation
 
