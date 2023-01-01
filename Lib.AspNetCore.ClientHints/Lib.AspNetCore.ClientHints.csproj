@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Lib.AspNetCore.ClientHints is a library which provides support to ASP.NET Core for set of HTTP request header fields, colloquially known as Client Hints, which allow user agents to indicate device and agent specific preferences.</Description>
-    <Copyright>Copyright © 2017 - 2022 Tomasz Pęczek</Copyright>
+    <Copyright>Copyright © 2017 - 2023 Tomasz Pęczek</Copyright>
     <VersionPrefix>0.5.0</VersionPrefix>
     <Authors>Tomasz Pęczek</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
